@@ -1,0 +1,324 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ABM Creator | Studio</title>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Inter:wght@400;500;600&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+</head>
+
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="brand">
+                <div class="logo">ABM</div>
+                <div class="brand-text">
+                    <h2>ABM Creator</h2>
+                    <p>Studio</p>
+                </div>
+            </div>
+
+            <nav class="nav-menu">
+                <button class="nav-item active" onclick="switchTab('feed', this)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <rect x="3" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="3" width="7" height="7"></rect>
+                        <rect x="14" y="14" width="7" height="7"></rect>
+                        <rect x="3" y="14" width="7" height="7"></rect>
+                    </svg>
+                    <span>Feed</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('create', this)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M12 20h9"></path>
+                        <path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path>
+                    </svg>
+                    <span>Gerar Carrossel</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('reports', this)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <line x1="18" y1="20" x2="18" y2="10"></line>
+                        <line x1="12" y1="20" x2="12" y2="4"></line>
+                        <line x1="6" y1="20" x2="6" y2="14"></line>
+                    </svg>
+                    <span>Relatórios</span>
+                </button>
+                <button class="nav-item" onclick="switchTab('settings', this)">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <circle cx="12" cy="12" r="3"></circle>
+                        <path
+                            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z">
+                        </path>
+                    </svg>
+                    <span>Configurações</span>
+                </button>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="content-area">
+            <!-- Reports View -->
+            <section id="view-reports" class="view-section">
+                <header class="section-header">
+                    <div class="header-titles">
+                        <h1>📊 Gerador de Relatórios</h1>
+                        <p>Suba os prints das plataformas e o Gemini extrai as métricas automaticamente.</p>
+                    </div>
+                </header>
+
+                <!-- Config Card -->
+                <div class="form-card glass" style="margin-bottom:24px;">
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Nome do Cliente</label>
+                            <input type="text" id="rpt-client" placeholder="Ex: Clínica Dra. Ana">
+                        </div>
+                        <div class="input-group">
+                            <label>Período</label>
+                            <input type="text" id="rpt-period" placeholder="Ex: Fevereiro/2026 ou 01/02 - 28/02">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Upload Zones -->
+                <div class="platform-uploads">
+                    <!-- Google Ads -->
+                    <div class="platform-upload-section" data-platform="google-ads">
+                        <div class="platform-upload-header">
+                            <div class="platform-logo google-ads-logo">G</div>
+                            <div>
+                                <div class="platform-upload-name">Google Ads</div>
+                                <div class="platform-upload-sub">Arraste prints ou clique para selecionar</div>
+                            </div>
+                            <span class="file-count-badge" id="count-google-ads">0 prints</span>
+                        </div>
+                        <div class="upload-zone" id="zone-google-ads" onclick="triggerFileInput('google-ads')">
+                            <input type="file" id="input-google-ads" multiple accept="image/*" style="display:none"
+                                onchange="handleFiles(this, 'google-ads')">
+                            <div class="upload-zone-icon">📈</div>
+                            <div class="upload-zone-text">Clique ou arraste prints do Google Ads</div>
+                            <div class="upload-zone-sub">PNG, JPG ou WEBP — múltiplos arquivos</div>
+                        </div>
+                        <div class="upload-preview-grid" id="preview-google-ads"></div>
+                    </div>
+
+                    <!-- Meta Ads -->
+                    <div class="platform-upload-section" data-platform="meta-ads">
+                        <div class="platform-upload-header">
+                            <div class="platform-logo meta-ads-logo">M</div>
+                            <div>
+                                <div class="platform-upload-name">Meta Ads</div>
+                                <div class="platform-upload-sub">Facebook & Instagram Ads</div>
+                            </div>
+                            <span class="file-count-badge" id="count-meta-ads">0 prints</span>
+                        </div>
+                        <div class="upload-zone" id="zone-meta-ads" onclick="triggerFileInput('meta-ads')">
+                            <input type="file" id="input-meta-ads" multiple accept="image/*" style="display:none"
+                                onchange="handleFiles(this, 'meta-ads')">
+                            <div class="upload-zone-icon">📱</div>
+                            <div class="upload-zone-text">Clique ou arraste prints do Meta Ads</div>
+                            <div class="upload-zone-sub">PNG, JPG ou WEBP — múltiplos arquivos</div>
+                        </div>
+                        <div class="upload-preview-grid" id="preview-meta-ads"></div>
+                    </div>
+
+                    <!-- Analytics -->
+                    <div class="platform-upload-section" data-platform="analytics">
+                        <div class="platform-upload-header">
+                            <div class="platform-logo analytics-logo">A</div>
+                            <div>
+                                <div class="platform-upload-name">Google Analytics</div>
+                                <div class="platform-upload-sub">GA4 ou Universal Analytics</div>
+                            </div>
+                            <span class="file-count-badge" id="count-analytics">0 prints</span>
+                        </div>
+                        <div class="upload-zone" id="zone-analytics" onclick="triggerFileInput('analytics')">
+                            <input type="file" id="input-analytics" multiple accept="image/*" style="display:none"
+                                onchange="handleFiles(this, 'analytics')">
+                            <div class="upload-zone-icon">🔍</div>
+                            <div class="upload-zone-text">Clique ou arraste prints do Analytics</div>
+                            <div class="upload-zone-sub">PNG, JPG ou WEBP — múltiplos arquivos</div>
+                        </div>
+                        <div class="upload-preview-grid" id="preview-analytics"></div>
+                    </div>
+                </div>
+
+                <!-- Generate Button -->
+                <div class="form-actions" style="margin-top:32px; justify-content:space-between; align-items:center;">
+                    <div id="rptStatus" class="status-msg"></div>
+                    <div style="display:flex; gap:12px;">
+                        <button class="btn-secondary" onclick="clearAllUploads()">🗑️ Limpar</button>
+                        <button id="btnGenerateReport" class="btn-primary" onclick="generateReport()">
+                            📊 Gerar Relatório
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Report Output -->
+                <div id="reportOutput" style="margin-top:40px;"></div>
+            </section>
+
+            <!-- Feed View -->
+            <section id="view-feed" class="view-section active">
+                <header class="section-header">
+                    <div class="header-titles">
+                        <h1>Seu Feed</h1>
+                        <p id="totalCarouselBadge">Carregando...</p>
+                    </div>
+                </header>
+
+                <div id="cardsRoot" class="cards-list">
+                    <!-- Cards injected here -->
+                </div>
+            </section>
+
+            <!-- Create AI View -->
+            <section id="view-create" class="view-section">
+                <header class="section-header">
+                    <div class="header-titles">
+                        <h1>✨ Assistente Criativo</h1>
+                        <p>Descreva sua ideia e eu crio o carrossel completo.</p>
+                    </div>
+                </header>
+
+                <div class="form-card glass">
+                    <!-- Row 1: Handle + Tema -->
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Handle / Perfil</label>
+                            <input type="text" id="aiHandle" placeholder="@brottoandre">
+                        </div>
+                        <div class="input-group">
+                            <label>Público-alvo / Tema</label>
+                            <input type="text" id="aiTema" placeholder="Ex: Dono de clínica, Coach, Empreendedor">
+                        </div>
+                    </div>
+
+                    <!-- Row 2: Platform + NumSlides -->
+                    <div class="form-row">
+                        <div class="input-group">
+                            <label>Plataforma</label>
+                            <select id="aiPlatform">
+                                <option value="Instagram Feed · 1080×1080">Instagram Feed · 1080×1080</option>
+                                <option value="LinkedIn · 1080×1080">LinkedIn · 1080×1080</option>
+                                <option value="Instagram Stories · 1080×1920">Instagram Stories · 1080×1920</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Número de slides</label>
+                            <select id="aiNumSlides">
+                                <option value="4">4 slides</option>
+                                <option value="5">5 slides</option>
+                                <option value="6" selected>6 slides (recomendado)</option>
+                                <option value="7">7 slides</option>
+                                <option value="8">8 slides</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- Prompt -->
+                    <div class="input-group">
+                        <label>Ideia, tema ou texto base</label>
+                        <textarea id="aiPrompt" rows="6"
+                            placeholder="Cole aqui um artigo, rascunho, ideia de tema ou qualquer conteúdo. Quanto mais contexto, melhor o resultado..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <div id="aiStatus" class="status-msg"></div>
+                        <button id="btnGenerate" class="btn-primary" onclick="generateAiCarousel()">
+                            ✨ Gerar com Gemini
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Settings View -->
+            <section id="view-settings" class="view-section">
+                <header class="section-header">
+                    <div class="header-titles">
+                        <h1>⚙️ Configurações</h1>
+                        <p>Suas credenciais (Salvas apenas localmente)</p>
+                    </div>
+                </header>
+
+                <div class="settings-grid">
+                    <!-- Gemini Config -->
+                    <div class="form-card glass">
+                        <h3>🤖 Gemini API</h3>
+                        <p class="desc">Acesse o Google AI Studio para obter a chave grátis.</p>
+                        <div class="input-group">
+                            <label>API Key</label>
+                            <input type="password" id="geminiKey" placeholder="AIzaSy...">
+                        </div>
+                        <div class="input-group">
+                            <label>Seu Handle padrão</label>
+                            <input type="text" id="configHandle" placeholder="@brottoandre">
+                        </div>
+                    </div>
+
+                    <!-- Instagram Config -->
+                    <div class="form-card glass">
+                        <h3>📸 Instagram (Autopost API)</h3>
+                        <p class="desc">Postagem silenciosa em background (Nós não usamos Vercel).</p>
+                        <div class="input-group">
+                            <label>Usuário (@)</label>
+                            <input type="text" id="igUser" placeholder="Seu nome de usuário">
+                        </div>
+                        <div class="input-group">
+                            <label>Senha</label>
+                            <input type="password" id="igPass" placeholder="Sua senha">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-actions" style="margin-top:24px;">
+                    <div id="settingsStatus" class="status-msg"></div>
+                    <button class="btn-primary" onclick="saveSettings()">Salvar Configurações</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Render Zone (hidden — used by html2canvas) -->
+    <div id="renderZone"
+        style="position:fixed;top:-9999px;left:-9999px;width:1080px;height:1080px;overflow:hidden;pointer-events:none;">
+    </div>
+
+    <!-- Modals -->
+    <!-- Edit Slide Modal (filled dynamically by app.js) -->
+    <div id="editSlideModal" class="modal-overlay" style="display:none;"></div>
+
+    <div id="postModal" class="modal-overlay" style="display:none;">
+        <div class="modal-card">
+            <h2>Publicar no Instagram</h2>
+            <div style="margin-bottom:20px;">
+                <label>Legenda do Post (Opcional):</label>
+                <textarea id="postCaption" rows="4"
+                    placeholder="Escreva a legenda que vai acompanhar as imagens..."></textarea>
+            </div>
+            <div class="form-actions">
+                <button class="btn-secondary"
+                    onclick="document.getElementById('postModal').style.display='none'">Cancelar</button>
+                <button id="btnConfirmPost" class="btn-primary" onclick="confirmPostInstagram()">Publicar Agora</button>
+            </div>
+            <div id="postStatus" class="status-msg" style="margin-top:12px;text-align:center;"></div>
+        </div>
+    </div>
+
+    <!-- Notifications Toast -->
+    <div id="toast" class="toast">Notificação</div>
+
+    <script src="/js/app.js"></script>
+</body>
+
+</html>
