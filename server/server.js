@@ -103,7 +103,7 @@ app.post('/api/generate-report', async (req, res) => {
         if (!uploads || uploads.length === 0) return res.status(400).json({ error: 'Nenhuma imagem enviada.' });
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: 'gemini-2.5-pro' });
+        const model = genAI.getGenerativeModel({ model: 'gemini-2.0-flash' });
 
         const platformInstructions = {
             'google-ads': `Para prints do Google Ads, extraia: impressões, cliques, CTR (%), CPC médio (R$), custo total (R$), conversões, custo por conversão (R$), ROAS, taxa de conversão (%).`,
@@ -237,7 +237,7 @@ app.post('/api/generate-carousel', async (req, res) => {
         const today = new Date().toLocaleDateString('pt-BR');
 
         const genAI = new GoogleGenerativeAI(apiKey);
-        const model = genAI.getGenerativeModel({ model: "gemini-2.5-pro" });
+        const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash" });
 
         const systemPrompt = `Você é um estrategista de conteúdo e curador visual especialista em carrosséis de alta conversão para redes sociais.
 O usuário enviará uma ideia, tema ou texto base e você vai transformar em um carrossel premium em preto e dourado.
