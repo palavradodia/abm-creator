@@ -408,6 +408,16 @@ button.btn-ig:hover {
     color: #fff;
 }
 
+.ica-blue-bg {
+    background-color: #0b3d91;
+    color: #ffffff;
+}
+
+.ica-white-bg {
+    background-color: #ffffff;
+    color: #0b3d91;
+}
+
 .r-badge {
     position: absolute;
     top: 80px;

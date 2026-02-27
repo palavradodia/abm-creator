@@ -182,65 +182,115 @@
                 </div>
             </section>
 
-            <!-- Create AI View -->
+            <!-- Create View -->
             <section id="view-create" class="view-section">
                 <header class="section-header">
                     <div class="header-titles">
-                        <h1>✨ Assistente Criativo</h1>
-                        <p>Descreva sua ideia e eu crio o carrossel completo.</p>
+                        <h1>✏️ Criar Carrossel</h1>
+                        <p>Crie manualmente ou use o Gemini para gerar automaticamente.</p>
                     </div>
                 </header>
 
-                <div class="form-card glass">
-                    <!-- Row 1: Handle + Tema -->
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label>Handle / Perfil</label>
-                            <input type="text" id="aiHandle" placeholder="@brottoandre">
-                        </div>
-                        <div class="input-group">
-                            <label>Público-alvo / Tema</label>
-                            <input type="text" id="aiTema" placeholder="Ex: Dono de clínica, Coach, Empreendedor">
+                <!-- Mode Tabs -->
+                <div class="create-mode-tabs">
+                    <button id="tab-manual" class="create-tab active" onclick="switchCreateMode('manual')">
+                        ✏️ Criar Manualmente
+                    </button>
+                    <button id="tab-ai" class="create-tab" onclick="switchCreateMode('ai')">
+                        ✨ Gerar com IA (Gemini)
+                    </button>
+                </div>
+
+                <!-- Panel: Manual -->
+                <div id="panel-manual">
+                    <div class="form-card glass" style="margin-bottom:20px;">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Título do Carrossel</label>
+                                <input type="text" id="manualTitle" placeholder="Ex: 5 erros que travam sua clínica">
+                            </div>
+                            <div class="input-group">
+                                <label>Público-alvo / Tema</label>
+                                <input type="text" id="manualTema" placeholder="Ex: Dono de clínica, Coach...">
+                            </div>
+                            <div class="input-group">
+                                <label>Handle padrão</label>
+                                <input type="text" id="manualHandle" placeholder="@brottoandre">
+                            </div>
+                            <div class="input-group">
+                                <label>Plataforma</label>
+                                <select id="manualPlatform">
+                                    <option value="Instagram Feed · 1080×1080">Instagram Feed · 1080×1080</option>
+                                    <option value="LinkedIn · 1080×1080">LinkedIn · 1080×1080</option>
+                                    <option value="Instagram Stories · 1080×1920">Instagram Stories · 1080×1920</option>
+                                </select>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Row 2: Platform + NumSlides -->
-                    <div class="form-row">
-                        <div class="input-group">
-                            <label>Plataforma</label>
-                            <select id="aiPlatform">
-                                <option value="Instagram Feed · 1080×1080">Instagram Feed · 1080×1080</option>
-                                <option value="LinkedIn · 1080×1080">LinkedIn · 1080×1080</option>
-                                <option value="Instagram Stories · 1080×1920">Instagram Stories · 1080×1920</option>
-                            </select>
-                        </div>
-                        <div class="input-group">
-                            <label>Número de slides</label>
-                            <select id="aiNumSlides">
-                                <option value="4">4 slides</option>
-                                <option value="5">5 slides</option>
-                                <option value="6" selected>6 slides (recomendado)</option>
-                                <option value="7">7 slides</option>
-                                <option value="8">8 slides</option>
-                            </select>
-                        </div>
-                    </div>
+                    <!-- Slide List -->
+                    <div id="manualSlideList"></div>
 
-                    <!-- Prompt -->
-                    <div class="input-group">
-                        <label>Ideia, tema ou texto base</label>
-                        <textarea id="aiPrompt" rows="6"
-                            placeholder="Cole aqui um artigo, rascunho, ideia de tema ou qualquer conteúdo. Quanto mais contexto, melhor o resultado..."></textarea>
+                    <!-- Add Slide / Save -->
+                    <div class="form-actions"
+                        style="margin-top:20px; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                        <button class="btn-secondary" onclick="manualAddSlide()">➕ Adicionar Slide</button>
+                        <button id="btnSaveManual" class="btn-primary" onclick="saveManualCarousel()">💾 Salvar
+                            Carrossel</button>
                     </div>
+                </div>
 
-                    <div class="form-actions">
-                        <div id="aiStatus" class="status-msg"></div>
-                        <button id="btnGenerate" class="btn-primary" onclick="generateAiCarousel()">
-                            ✨ Gerar com Gemini
-                        </button>
+                <!-- Panel: AI -->
+                <div id="panel-ai" style="display:none;">
+                    <div class="form-card glass">
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Handle / Perfil</label>
+                                <input type="text" id="aiHandle" placeholder="@brottoandre">
+                            </div>
+                            <div class="input-group">
+                                <label>Público-alvo / Tema</label>
+                                <input type="text" id="aiTema" placeholder="Ex: Dono de clínica, Coach, Empreendedor">
+                            </div>
+                        </div>
+
+                        <div class="form-row">
+                            <div class="input-group">
+                                <label>Plataforma</label>
+                                <select id="aiPlatform">
+                                    <option value="Instagram Feed · 1080×1080">Instagram Feed · 1080×1080</option>
+                                    <option value="LinkedIn · 1080×1080">LinkedIn · 1080×1080</option>
+                                    <option value="Instagram Stories · 1080×1920">Instagram Stories · 1080×1920</option>
+                                </select>
+                            </div>
+                            <div class="input-group">
+                                <label>Número de slides</label>
+                                <select id="aiNumSlides">
+                                    <option value="4">4 slides</option>
+                                    <option value="5">5 slides</option>
+                                    <option value="6" selected>6 slides (recomendado)</option>
+                                    <option value="7">7 slides</option>
+                                    <option value="8">8 slides</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <div class="input-group">
+                            <label>Ideia, tema ou texto base</label>
+                            <textarea id="aiPrompt" rows="6"
+                                placeholder="Cole aqui um artigo, rascunho, ideia de tema ou qualquer conteúdo. Quanto mais contexto, melhor o resultado..."></textarea>
+                        </div>
+
+                        <div class="form-actions">
+                            <div id="aiStatus" class="status-msg"></div>
+                            <button id="btnGenerate" class="btn-primary" onclick="generateAiCarousel()">
+                                ✨ Gerar com Gemini
+                            </button>
+                        </div>
                     </div>
                 </div>
             </section>
+
 
             <!-- Settings View -->
             <section id="view-settings" class="view-section">

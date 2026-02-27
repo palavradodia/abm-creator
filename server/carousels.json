@@ -1,0 +1,196 @@
+[
+  {
+    "id": "lotar-agenda",
+    "title": "Lotar agenda sem depender de indicação",
+    "tema": "Dono de clínica",
+    "platform": "Instagram Feed · 1080×1080",
+    "date": "24/02/2026",
+    "slides": [
+      {
+        "tag": "Capa",
+        "layout": "typography",
+        "bg": "hook-bg",
+        "headline": "Sua agenda não está vazia TESTE DE EDIpor falta de paciente.",
+        "highlight": "",
+        "body": "Está vazia porque você terceirizou o crescimento para quem te conhece."
+      },
+      {
+        "tag": "O Comportamento Real",
+        "layout": "typography",
+        "bg": "content-bg",
+        "headline": "Você apostou que excelência era suficiente.",
+        "highlight": "excelência",
+        "body": "Esperou que quem saísse satisfeito indicasse o próximo. Funcionou até parar de funcionar."
+      },
+      {
+        "tag": "A Consequência",
+        "layout": "typography",
+        "bg": "content-bg",
+        "headline": "Agenda imprevisível não é azar. É estrutura.",
+        "highlight": "estrutura",
+        "body": "Um mês cheio, uma semana vazia, um desconto pra fechar. Você tem um problema de distribuição."
+      },
+      {
+        "tag": "Como É Quando Funciona",
+        "layout": "typography",
+        "bg": "content-bg",
+        "headline": "Você sabe exatamente quantos pacientes entram no mês que vem.",
+        "highlight": "exatamente",
+        "body": "Quem controla a entrada controla o negócio — e não aceita qualquer coisa porque a conta aperta."
+      },
+      {
+        "tag": "O Que Exigimos",
+        "layout": "quote",
+        "bg": "content-bg",
+        "headline": "Não trabalhamos com quem quer testar com R$ 300 pra ver se funciona.",
+        "highlight": "",
+        "body": "Trabalhamos com quem entende que resultado exige processo."
+      },
+      {
+        "tag": "CTA",
+        "layout": "typography",
+        "bg": "cta-bg",
+        "headline": "Diagnóstico gratuito. Sem proposta genérica.",
+        "highlight": "gratuito",
+        "body": "Manda uma mensagem agora. A gente analisa sua clínica e o que faz sentido.",
+        "isCta": true,
+        "ctaLabel": "Falar no Direct / WhatsApp",
+        "handle": "@brottoandre"
+      }
+    ]
+  },
+  {
+    "id": "concorrente-menor",
+    "title": "Por que seu concorrente menor está faturando mais que você",
+    "tema": "Dono de clínica / médico",
+    "platform": "Instagram Feed · 1080×1080",
+    "date": "24/02/2026",
+    "slides": [
+      {
+        "tag": "Capa",
+        "layout": "split",
+        "bg": "hook-bg",
+        "headline": "Seu concorrente menor está faturando mais do que você.",
+        "highlight": "",
+        "body": "Ele não tem médicos melhores. Não tem mais experiência. Não tem o dobro de estrutura.",
+        "imgUrl": "https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "tag": "A Verdade Incômoda",
+        "layout": "quote",
+        "bg": "content-bg",
+        "headline": "A diferença não é qualidade. É visibilidade.",
+        "highlight": "visibilidade",
+        "body": "Ele aparece quando o paciente pesquisa. Você não aparece."
+      },
+      {
+        "tag": "O Sistema Deles",
+        "layout": "stat",
+        "bg": "content-bg",
+        "headline": "3 pilares que ele usa. Você provavelmente tem zero.",
+        "highlight": "",
+        "statNum": "3×",
+        "statLabel": "mais pacientes novos por mês",
+        "listItems": [
+          "Tráfego pago rodando todos os dias",
+          "Conteúdo que filtra e educa o cliente certo",
+          "Follow-up automático com lead que não converteu"
+        ]
+      },
+      {
+        "tag": "Sua Realidade",
+        "layout": "fullbleed",
+        "bg": "content-bg",
+        "headline": "Todo mês você começa do zero. Todo mês ele escala o que já funciona.",
+        "highlight": "escala",
+        "body": "Isso não é falta de competência. É falta de estrutura de aquisição.",
+        "imgUrl": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=80"
+      },
+      {
+        "tag": "O Que Muda",
+        "layout": "typography",
+        "bg": "content-bg",
+        "headline": "Com o sistema certo, você para de perder para quem deveria aprender com você.",
+        "highlight": "perder",
+        "body": "Tráfego que converte. Conteúdo que filtra. Agenda cheia com quem você quer atender."
+      },
+      {
+        "tag": "CTA",
+        "layout": "typography",
+        "bg": "cta-bg",
+        "headline": "Chega de perder paciente para quem faz menos mas aparece mais.",
+        "highlight": "mais",
+        "body": "Manda uma mensagem. A gente analisa onde você está invisível e o que fazer primeiro.",
+        "isCta": true,
+        "ctaLabel": "Quero parar de perder pacientes",
+        "handle": "@brottoandre"
+      }
+    ]
+  },
+  {
+    "id": "sindrome-may-thurner",
+    "title": "S\u00edndrome de May-Thurner: O que voc\u00ea precisa saber",
+    "tema": "Pacientes / Sa\u00fade Vascular",
+    "platform": "Instagram Feed \u00b7 1080\u00d71080",
+    "date": "26/02/2026",
+    "slides": [
+      {
+        "tag": "Capa",
+        "layout": "typography",
+        "bg": "ica-blue-bg",
+        "headline": "Incha\u00e7o constante na perna esquerda? Pode n\u00e3o ser apenas m\u00e1 circula\u00e7\u00e3o.",
+        "highlight": "perna esquerda",
+        "body": "Conhe\u00e7a a S\u00edndrome de May-Thurner, uma condi\u00e7\u00e3o subdiagnosticada que exige aten\u00e7\u00e3o."
+      },
+      {
+        "tag": "Entenda o Problema",
+        "layout": "typography",
+        "bg": "ica-white-bg",
+        "headline": "Uma compress\u00e3o anat\u00f4mica que prejudica o retorno venoso.",
+        "highlight": "compress\u00e3o",
+        "body": "Ocorre quando a veia il\u00edaca esquerda \u00e9 apertada pela art\u00e9ria il\u00edaca direita contra a coluna lombar."
+      },
+      {
+        "tag": "Sintomas e Riscos",
+        "layout": "stat",
+        "bg": "ica-blue-bg",
+        "headline": "A compress\u00e3o leva ao estreitamento da veia e m\u00e1 circula\u00e7\u00e3o de sangue.",
+        "highlight": "",
+        "statNum": "72%",
+        "statLabel": "dos afetados s\u00e3o mulheres",
+        "listItems": [
+          "Varizes p\u00e9lvicas e na perna esquerda",
+          "Incha\u00e7o cr\u00f4nico e dor constante",
+          "Aumento do risco de Trombose (TVP)"
+        ]
+      },
+      {
+        "tag": "Diagn\u00f3stico",
+        "layout": "quote",
+        "bg": "ica-white-bg",
+        "headline": "Uma dor que muitos ignoram, at\u00e9 que o quadro se agrave.",
+        "highlight": "ignoram",
+        "body": "O diagn\u00f3stico come\u00e7a pelo ultrassom (Eco Doppler) e \u00e9 confirmado com exames de imagem avan\u00e7ados."
+      },
+      {
+        "tag": "Tratamento",
+        "layout": "typography",
+        "bg": "ica-blue-bg",
+        "headline": "A cirurgia endovascular trouxe al\u00edvio e seguran\u00e7a para os pacientes.",
+        "highlight": "seguran\u00e7a",
+        "body": "Hoje, o tratamento \u00e9 minimamente invasivo, utilizando cateterismo e implante de stents com alta efic\u00e1cia."
+      },
+      {
+        "tag": "CTA",
+        "layout": "typography",
+        "bg": "ica-white-bg",
+        "headline": "Cuide da sua sa\u00fade vascular com especialistas em vit\u00f3ria.",
+        "highlight": "especialistas",
+        "body": "Sente incha\u00e7o persistente na perna esquerda? Agende sua avalia\u00e7\u00e3o no ICA Vit\u00f3ria.",
+        "isCta": true,
+        "ctaLabel": "Agende pelo WhatsApp",
+        "handle": "@icavitoria"
+      }
+    ]
+  }
+]

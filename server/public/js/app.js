@@ -406,6 +406,247 @@ async function generateAiCarousel() {
     }
 }
 
+// ─── Manual Builder ────────────────────────────────────────────────────────
+let manualSlides = [];
+
+function manualAddSlide() {
+    manualSlides.push({
+        tag: 'Slide ' + (manualSlides.length + 1),
+        layout: 'typography',
+        bg: 'content-bg',
+        headline: '',
+        highlight: '',
+        body: '',
+        isCta: false,
+        ctaLabel: '',
+        handle: document.getElementById('manualHandle')?.value || '@perfil'
+    });
+    renderManualSlideList();
+}
+
+function manualRemoveSlide(idx) {
+    manualSlides.splice(idx, 1);
+    renderManualSlideList();
+}
+
+function manualMoveSlide(idx, dir) {
+    const target = idx + dir;
+    if (target < 0 || target >= manualSlides.length) return;
+    [manualSlides[idx], manualSlides[target]] = [manualSlides[target], manualSlides[idx]];
+    renderManualSlideList();
+}
+
+function manualReadSlide(idx) {
+    const s = manualSlides[idx];
+    s.tag = document.getElementById(`ms-tag-${idx}`)?.value || s.tag;
+    s.layout = document.getElementById(`ms-layout-${idx}`)?.value || s.layout;
+    s.bg = document.getElementById(`ms-bg-${idx}`)?.value || s.bg;
+    s.headline = document.getElementById(`ms-headline-${idx}`)?.value || '';
+    s.highlight = document.getElementById(`ms-highlight-${idx}`)?.value || '';
+    s.body = document.getElementById(`ms-body-${idx}`)?.value || '';
+    s.isCta = document.getElementById(`ms-iscta-${idx}`)?.checked || false;
+    s.ctaLabel = document.getElementById(`ms-ctaLabel-${idx}`)?.value || '';
+    s.handle = document.getElementById(`ms-handle-${idx}`)?.value || '';
+    s.statNum = document.getElementById(`ms-statNum-${idx}`)?.value || '';
+    s.statLabel = document.getElementById(`ms-statLabel-${idx}`)?.value || '';
+    const rawList = document.getElementById(`ms-listItems-${idx}`)?.value || '';
+    s.listItems = rawList.split('\n').map(l => l.trim()).filter(Boolean);
+    s.imgUrl = document.getElementById(`ms-imgUrl-${idx}`)?.value || '';
+}
+
+function manualUpdatePreview(idx) {
+    manualReadSlide(idx);
+    const previewEl = document.getElementById(`ms-preview-${idx}`);
+    if (!previewEl) return;
+    previewEl.innerHTML = '';
+    previewEl.appendChild(buildSlideEl(manualSlides[idx], idx, manualSlides.length));
+}
+
+function renderManualSlideList() {
+    const container = document.getElementById('manualSlideList');
+    if (!container) return;
+
+    container.innerHTML = manualSlides.map((s, idx) => `
+        <div class="manual-slide-card" id="msc-${idx}">
+            <div class="manual-slide-header">
+                <span class="manual-slide-num">Slide ${String(idx + 1).padStart(2, '0')}</span>
+                <div class="manual-slide-actions">
+                    <button onclick="manualMoveSlide(${idx},-1)" title="Mover para cima" ${idx === 0 ? 'disabled' : ''}>↑</button>
+                    <button onclick="manualMoveSlide(${idx},1)" title="Mover para baixo" ${idx === manualSlides.length - 1 ? 'disabled' : ''}>↓</button>
+                    <button onclick="manualRemoveSlide(${idx})" title="Remover slide" style="color:var(--accent)">✕</button>
+                </div>
+            </div>
+            <div class="manual-slide-body">
+                <div class="manual-preview-col">
+                    <div class="slide-scale" id="ms-preview-${idx}"></div>
+                </div>
+                <div class="manual-fields-col">
+                    <div class="edit-field-row">
+                        <div class="input-group">
+                            <label>Tag / Seção</label>
+                            <input type="text" id="ms-tag-${idx}" value="${s.tag}" placeholder="Capa, O Problema..." oninput="manualUpdatePreview(${idx})">
+                        </div>
+                        <div class="input-group">
+                            <label>Layout</label>
+                            <select id="ms-layout-${idx}" onchange="manualUpdatePreview(${idx})">
+                                <option value="typography" ${s.layout === 'typography' ? 'selected' : ''}>📝 Texto</option>
+                                <option value="quote" ${s.layout === 'quote' ? 'selected' : ''}>💬 Citação</option>
+                                <option value="stat" ${s.layout === 'stat' ? 'selected' : ''}>📊 Estatística</option>
+                                <option value="split" ${s.layout === 'split' ? 'selected' : ''}>🖼️ Texto + Imagem</option>
+                                <option value="fullbleed" ${s.layout === 'fullbleed' ? 'selected' : ''}>🌆 Imagem de Fundo</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Fundo</label>
+                            <select id="ms-bg-${idx}" onchange="manualUpdatePreview(${idx})">
+                                <option value="hook-bg" ${s.bg === 'hook-bg' ? 'selected' : ''}>Capa (Preto)</option>
+                                <option value="content-bg" ${s.bg === 'content-bg' ? 'selected' : ''}>Conteúdo (Escuro)</option>
+                                <option value="cta-bg" ${s.bg === 'cta-bg' ? 'selected' : ''}>CTA (Preto)</option>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Headline Principal</label>
+                        <textarea id="ms-headline-${idx}" rows="2" placeholder="Headline impactante..." oninput="manualUpdatePreview(${idx})">${s.headline}</textarea>
+                    </div>
+                    <div class="edit-field-row">
+                        <div class="input-group">
+                            <label>Destaque em Dourado</label>
+                            <input type="text" id="ms-highlight-${idx}" value="${s.highlight || ''}" placeholder="palavra exata" oninput="manualUpdatePreview(${idx})">
+                        </div>
+                    </div>
+                    <div class="input-group">
+                        <label>Texto de Apoio</label>
+                        <textarea id="ms-body-${idx}" rows="2" placeholder="Texto de suporte ao headline..." oninput="manualUpdatePreview(${idx})">${s.body || ''}</textarea>
+                    </div>
+                    <div class="input-group" id="ms-stat-fields-${idx}" style="${s.layout === 'stat' ? '' : 'display:none'}">
+                        <label>Número de Destaque</label>
+                        <input type="text" id="ms-statNum-${idx}" value="${s.statNum || ''}" placeholder="Ex: 73%" oninput="manualUpdatePreview(${idx})">
+                        <label style="margin-top:8px">Rótulo do Número</label>
+                        <input type="text" id="ms-statLabel-${idx}" value="${s.statLabel || ''}" placeholder="mais pacientes/mês" oninput="manualUpdatePreview(${idx})">
+                        <label style="margin-top:8px">Bullets (1 por linha)</label>
+                        <textarea id="ms-listItems-${idx}" rows="3" oninput="manualUpdatePreview(${idx})">${(s.listItems || []).join('\n')}</textarea>
+                    </div>
+                    <div class="input-group" id="ms-img-fields-${idx}" style="${(s.layout === 'split' || s.layout === 'fullbleed') ? '' : 'display:none'}">
+                        <label>URL da Imagem</label>
+                        <input type="text" id="ms-imgUrl-${idx}" value="${s.imgUrl || ''}" placeholder="https://images.unsplash.com/..." oninput="manualUpdatePreview(${idx})">
+                    </div>
+                    <div class="edit-field-row" style="align-items:center;gap:12px;margin-top:8px">
+                        <label style="display:flex;align-items:center;gap:8px;cursor:pointer">
+                            <input type="checkbox" id="ms-iscta-${idx}" ${s.isCta ? 'checked' : ''} onchange="manualUpdatePreview(${idx})"> É slide CTA
+                        </label>
+                    </div>
+                    <div id="ms-cta-fields-${idx}" style="${s.isCta ? '' : 'display:none'}">
+                        <div class="edit-field-row">
+                            <div class="input-group">
+                                <label>Texto do Botão</label>
+                                <input type="text" id="ms-ctaLabel-${idx}" value="${s.ctaLabel || ''}" placeholder="Falar no WhatsApp" oninput="manualUpdatePreview(${idx})">
+                            </div>
+                            <div class="input-group">
+                                <label>Handle</label>
+                                <input type="text" id="ms-handle-${idx}" value="${s.handle || ''}" placeholder="@perfil" oninput="manualUpdatePreview(${idx})">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `).join('');
+
+    // Render previews and hook up dynamic show/hide
+    manualSlides.forEach((s, idx) => {
+        const previewEl = document.getElementById(`ms-preview-${idx}`);
+        if (previewEl) previewEl.appendChild(buildSlideEl(s, idx, manualSlides.length));
+
+        // Show/hide stat fields
+        const layoutSel = document.getElementById(`ms-layout-${idx}`);
+        if (layoutSel) layoutSel.addEventListener('change', () => {
+            const v = layoutSel.value;
+            document.getElementById(`ms-stat-fields-${idx}`).style.display = v === 'stat' ? '' : 'none';
+            document.getElementById(`ms-img-fields-${idx}`).style.display = (v === 'split' || v === 'fullbleed') ? '' : 'none';
+        });
+
+        // Show/hide CTA fields
+        const ctaCheck = document.getElementById(`ms-iscta-${idx}`);
+        if (ctaCheck) ctaCheck.addEventListener('change', () => {
+            document.getElementById(`ms-cta-fields-${idx}`).style.display = ctaCheck.checked ? '' : 'none';
+        });
+    });
+}
+
+async function saveManualCarousel() {
+    // Read all slides before saving
+    manualSlides.forEach((_, idx) => manualReadSlide(idx));
+
+    const title = document.getElementById('manualTitle').value.trim();
+    const tema = document.getElementById('manualTema').value.trim();
+    const platform = document.getElementById('manualPlatform').value;
+    const handle = document.getElementById('manualHandle').value.trim();
+
+    if (!title) return showToast('Dê um título ao carrossel.');
+    if (manualSlides.length === 0) return showToast('Adicione pelo menos 1 slide.');
+    if (!manualSlides.some(s => s.headline)) return showToast('Pelo menos um slide precisa ter headline.');
+
+    // Apply handle to CTA slides
+    manualSlides.forEach(s => { if (s.isCta && handle && !s.handle) s.handle = handle; });
+
+    const payload = {
+        id: 'manual-' + Date.now(),
+        title,
+        tema: tema || 'Manual',
+        platform,
+        date: new Date().toLocaleDateString('pt-BR'),
+        slides: manualSlides
+    };
+
+    const btn = document.getElementById('btnSaveManual');
+    btn.textContent = 'Salvando...';
+    btn.disabled = true;
+
+    try {
+        const res = await fetch('/api/save-carousel', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
+        });
+        const data = await res.json();
+        if (data.error) throw new Error(data.error);
+
+        showToast('✅ Carrossel salvo com sucesso!');
+        manualSlides = [];
+        document.getElementById('manualTitle').value = '';
+        document.getElementById('manualTema').value = '';
+        renderManualSlideList();
+
+        setTimeout(() => {
+            const feedBtn = document.querySelector('.nav-item');
+            switchTab('feed', feedBtn);
+        }, 1500);
+    } catch (e) {
+        showToast('Erro ao salvar: ' + e.message);
+    } finally {
+        btn.textContent = '💾 Salvar Carrossel';
+        btn.disabled = false;
+    }
+}
+
+function switchCreateMode(mode) {
+    document.getElementById('tab-ai').classList.toggle('active', mode === 'ai');
+    document.getElementById('tab-manual').classList.toggle('active', mode === 'manual');
+    document.getElementById('panel-ai').style.display = mode === 'ai' ? '' : 'none';
+    document.getElementById('panel-manual').style.display = mode === 'manual' ? '' : 'none';
+    if (mode === 'manual' && manualSlides.length === 0) {
+        // Start with 3 default slides
+        manualSlides = [
+            { tag: 'Capa', layout: 'typography', bg: 'hook-bg', headline: 'Seu headline de impacto aqui', highlight: '', body: 'Texto de apoio que complementa o hook.', isCta: false, ctaLabel: '', handle: '' },
+            { tag: 'Conteúdo', layout: 'typography', bg: 'content-bg', headline: 'Uma ideia por slide', highlight: 'ideia', body: 'Desenvolvimento direto e objetivo da ideia central.', isCta: false, ctaLabel: '', handle: '' },
+            { tag: 'CTA', layout: 'typography', bg: 'cta-bg', headline: 'Chame para ação aqui', highlight: '', body: 'Fala a próxima etapa de forma clara e direta.', isCta: true, ctaLabel: 'Falar no WhatsApp', handle: '' }
+        ];
+        renderManualSlideList();
+    }
+}
+
+
 // ─── html2canvas capture ──────────────────────────────────────────────────
 async function captureSlideHelper(s, idx, total) {
     const wrap = document.getElementById('renderZone');
